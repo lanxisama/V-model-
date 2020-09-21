@@ -15,6 +15,7 @@ class Oberver{
                     //Dep.target是一个Watch对象
                     myDep.listen(Dep.target)
                 }
+                Dep.target=this //将这个对象注入到Dep
                 return val
             },
             set(newVal){
