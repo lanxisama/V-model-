@@ -5,7 +5,6 @@ class Watch{
         this.node=node
         this.name=name
         this.vm=vm
-        Dep.target=this //将这个对象注入到Dep
         this.update()
         Dep.target=null
     }
