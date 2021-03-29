@@ -1,6 +1,6 @@
 // Vue对象
-import Observer from './Observer'
-import Complier from './Complier'
+import Observer from './Observer.js'
+import Complier from './Complier.js'
 class Vue{
     constructor(options){
         this.$options=options
@@ -10,7 +10,7 @@ class Vue{
             this._provy(key)
         })
         new Observer(this._data)
-        new Complier(this.$el.this) //第二个参数是vue对象
+        new Complier(this.$el,this) //第二个参数是vue对象
     }
     _provy(key){
         var self=this

@@ -4,6 +4,7 @@ class Dep{
         this.listenerList=[]
     }
     listen(listener){
+        //listener是一个wathcer对象
         this.listenerList.push(listener)
     }
     notify(){

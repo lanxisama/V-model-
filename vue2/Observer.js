@@ -8,23 +8,22 @@ class Oberver{
         })
     }
     _bind(data,key,val){
-        var myDep=new Dep()
+        var myDep=new Dep(); //实例化一个dep
         Object.defineProperty(data,key,{
             get(){
                 if(Dep.target){
                     //Dep.target是一个Watch对象
                     myDep.listen(Dep.target)
                 }
-                Dep.target=this //将这个对象注入到Dep
+                // Dep.target=this //将这个对象注入到Dep
                 return val
             },
             set(newVal){
-                if(newVal===val)
-                {
-                    return
+                if(newVal===val){
+                    return;
                 }
                 val=newVal
-                myDep.notify()
+                myDep.notify();
             }
         })
     }

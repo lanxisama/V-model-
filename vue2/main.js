@@ -6,4 +6,4 @@ import Vue from './Vue.js'
          message:"双向绑定"
      },
 })
-console.log(vm)
+consol.log('vm',vm)

@@ -1,6 +1,6 @@
 import Watch from "./Watch"
 //解析Vue模板
-const Reg=/\{\{(.)\}\}/
+const Reg=/\{\{(.*)\}\}/
 class Complier{
     constructor(el,vm){
         this.el=document.querySelector(el)
@@ -12,10 +12,11 @@ class Complier{
     _createFragment(){
         var frag =document.createDocumentFragment()
         var child
-        while(child =this.el.firstChild){
+        while(child =this.el.firstChild){ //这里会一直获取el的firstChild
             this._complie(child)
-            frag.appendChild(child)
+            frag.appendChild(child) //node加入到别的节点后会移除 
         }
+ 
         return frag
     }
     //编译
@@ -27,6 +28,7 @@ class Complier{
             if(attr.hasOwnProperty('v-model')){
                 var name=attr['v-model'].nodeValue
                 node.addEventListener('input',function(e){
+                    console.log('input')
                     self.vm[name]=e.target.value
                 })
                 //将节点值改成value值
@@ -36,13 +38,17 @@ class Complier{
         }
         if(node.nodeType===3){
             //文本节点
+            console.log('文本节点',node.nodeValue)
             if(Reg.test(node.nodeValue)){
                 //判断是不是有{{}}
                 var name=RegExp.$1
                 name=name.trim() //去除空格
                 //获得值 交给Watcher观察
                 //vm是Vue对象
-                new Watch(node,name,this.vm)
+                console.log(name,node.nodeValue)
+                // {{message}} 
+                // new Watch(文本节点,message,vue对象)
+                new Watch(node,name,this.vm) 
             }
         }
     }
